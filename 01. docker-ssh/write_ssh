@@ -1,0 +1,26 @@
+# write_ssh
+
+# Permit root login
+# 允许root登录
+echo -e "\
+Port 22\n\
+PermitRootLogin yes\n\
+PasswordAuthentication yes\
+" >> /etc/ssh/sshd_config
+
+# Write auto-start script
+# 自动启动应用脚本
+echo -e "\
+import os\n\
+ssh_result = os.popen('service ssh status')\n\
+if 'not running' in ssh_result.readlines()[0]:\n\
+    os.system('service ssh start')\n\
+" >> /root/.start.py
+
+# Add this script to bashrc
+# 将脚本加入bashrc
+echo -e "python3 /root/.start.py" >> /root/.bashrc
+
+# Set root login password
+# 设置r密码
+echo -e "root:change_this_to_youpassword-ffzzlmt" | chpasswd
