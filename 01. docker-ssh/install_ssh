@@ -1,6 +1,6 @@
 # install_ssh
 
-# Install development
+# Install dependent software
 # 安装依赖
 apt update
 apt install openssh-client openssh-server vim -y
